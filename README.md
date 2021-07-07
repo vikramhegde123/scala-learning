@@ -1,22 +1,12 @@
-# Data Platform Common
+# Scala Learning
 
-A set of common libraries and utils for the whole data platform.
+## Collections
 
-## Build
-
-To build this repository you need to create a new (update existing) file:
-
-```bash
-$HOME/.gradle/gradle.properties
-```
-
-With following content:
-
-```bash
-vstsMavenAccessToken={YOUR_MAVEN_REPOSITORY_TOKEN}
-artifactVersion=1.0.0
-artifactDir=
-```
+List
+Map
+Set
+Tuple
+Iterators
 
 ## Spark Applications
 
