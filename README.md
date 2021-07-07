@@ -2,8 +2,8 @@
 
 ## Collections
 
--List
--Map
--Set
--Tuple
--Iterators
+- List
+- Map
+- Set
+- Tuple
+- Iterators
