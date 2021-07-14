@@ -9,7 +9,7 @@
 - [Iterators](docs/Collections.md)
 
 ## Pure Functional Programming
-- [Introduction]
+- [Introduction]()
 - [Purely Functional Parallelism]
 - [Monoids]
 - [Monads]
