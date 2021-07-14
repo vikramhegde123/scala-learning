@@ -2,8 +2,8 @@
 
 ## Collections
 
-- [List](docs/List.md)
-- [Map](docs/Map.md)
-- [Set](docs/Set.md)
-- [Tuple](docs/Tuple.md)
-- [Iterators](docs/Iterators.md)
+- [List](docs/Collections.md)
+- [Map](docs/Collections.md)
+- [Set](docs/Collections.md)
+- [Tuple](docs/Collections.md)
+- [Iterators](docs/Collections.md)
