@@ -66,15 +66,48 @@
 | toString |List(2, 5, 5, 3, 2).toString|Renders a collection to a String, including the collection’s type.|
 
 # Pattern Matching with Collections
-  `scala> val statuses = List(500, 404)
+  ```
+    scala> val statuses = List(500, 404)
     statuses: List[Int] = List(500, 404)
 
     scala> val msg = statuses.head match {
      |   case x if x < 500 => "okay"
      |   case _ => "whoah, an error"
      | }
-    msg: String = whoah, an error`
-   
+    msg: String = whoah, an error
+   ```
+    
+   With a pattern guard (see Matching with Pattern Guards), you could also match a single value inside a collection:
+   ```
+   scala> val msg = statuses match {
+     |   case x if x contains(500) => "has error"
+     |   case _ => "okay"
+     | }
+    msg: String = has error
+  ```
+  
+  Because collections support the equals operator (==) it shouldn’t be a surprise that they also support pattern matching. To match the entire collection, use a new      
+  collection as your pattern:
+  ```
+  scala> val msg = statuses match {
+     |   case List(404, 500) => "not found & error"
+     |   case List(500, 404) => "error & not found"
+     |   case List(200, 200) => "okay"
+     |   case _ => "not sure what happened"
+     | }
+  msg: String = error & not found
+  ```
+  
+  You can use value binding (see Matching with Wildcard Patterns) to bind values to some or all elements of a collection in your pattern guard:
+  ```
+  scala> val msg = statuses match {
+     |   case List(500, x) => s"Error followed by $x"
+     |   case List(e, x) => s"$e was followed by $x"
+     | }
+  msg: String = Error followed by 404
+  ```
+  
+
 
 # Exercises
 1. Create a list of the first 20 odd Long numbers. Can you create this with a for-loop, with the filter operation, and with the map operation? What’s the most efficient and      expressive way to write this?
