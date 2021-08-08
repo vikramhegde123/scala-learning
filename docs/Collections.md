@@ -1,5 +1,5 @@
 # Collections Hierachy
-[](images/collections-hierachy.png)
+![](images/collections-hierachy.png)
 
 # List Operations
 | Name  | Example | Description |
