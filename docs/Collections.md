@@ -1,3 +1,6 @@
+# Collections Hierachy
+[](images/collections-hierachy.png)
+
 # List Operations
 | Name  | Example | Description |
 | ------|------- | ------------- |
@@ -64,6 +67,55 @@
 | toMap |Set(1 -> true, 3 -> true).toMap|Converts a collection of 2-arity (length) tuples to a Map.|
 | toSet |List(2, 5, 5, 3, 2).toSet|Converts a collection to a Set.|
 | toString |List(2, 5, 5, 3, 2).toString|Renders a collection to a String, including the collection’s type.|
+
+#List
+The List class is a linear, immutable sequence. All this means is that it’s a linked-list
+that you can’t modify. Any time you want to add or remove List elements, you create
+a new List from an existing List.
+
+a) Creating Lists
+This is how you create an initial List:
+```
+val ints = List(1, 2, 3)
+val names = List("Joel", "Chris", "Ed")
+
+You can also declare the List’s type, if you prefer, though it generally isn’t necessary:
+
+val ints: List[Int] = List(1, 2, 3)
+val names: List[String] = List("Joel", "Chris", "Ed")
+```
+b) Adding elements to a List
+Because List is immutable, you can’t add new elements to it. Instead you create a new
+list by prepending or appending elements to an existing List. For instance, given this
+```
+List:
+val a = List(1,2,3)
+
+You prepend elements to a List like this:
+val b = 0 +: a
+and this:
+val b = List(-1, 0) ++: a
+105
+106
+
+The REPL shows how this works:
+scala> val b = 0 +: a
+b: List[Int] = List(0, 1, 2, 3)
+scala> val b = List(-1, 0) ++: a
+b: List[Int] = List(-1, 0, 1, 2, 3)
+```
+c) HOW TO LOOP OVER LISTS
+
+```
+val names = List("Joel", "Chris", "Ed")
+you can print each string like this:
+for (name <- names) println(name)
+This is what it looks like in the REPL:
+scala> for (name <- names) println(name)
+Joel
+Chris
+Ed
+```
 
 # Pattern Matching with Collections
   ```
