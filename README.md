@@ -1,22 +1,10 @@
 # Scala Learning
 
-## Collections
+## [Collections](docs/Collections.md)
 
-- [List](docs/Collections.md)
-- [Map](docs/Collections.md)
-- [Set](docs/Collections.md)
-- [Tuple](docs/Collections.md)
-- [Iterators](docs/Collections.md)
+## [Functional Programming](docs/Functional_Programming.md)
 
-## Pure Functional Programming
-- [Introduction]()
-- [Purely Functional Parallelism]()
-- [Monoids]()
-- [Monads]()
-- [Applicative and traversible factors]()
-- [Effects and I/O]()
-
-## Concurrency
+## Concurrency(docs/Concurrency.md)
 
 - [Introduction](docs/Concurrency.md)
 - [Threads](docs/Concurrency.md)
@@ -29,11 +17,11 @@
 - [Scheduler](docs/Concurrency.md)
 - [Event Bus](docs/Concurrency.md)
 
-## Design Patterns
-- [SingleTon]()
-- [Factory Pattern]()
-- [Composite]()
-- [Adaptor]()
-- [Decorator]()
-- [State machine]()
+## [Design Patterns](docs/design-pattern.md)
+- [SingleTon](docs/design-pattern.md)
+- [Factory Pattern](docs/design-pattern.md)
+- [Composite](docs/design-pattern.md)
+- [Adaptor](docs/design-pattern.md)
+- [Decorator](docs/design-pattern.md)
+- [State machine](docs/design-pattern.md)
 
