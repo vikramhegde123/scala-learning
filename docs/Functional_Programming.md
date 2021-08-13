@@ -115,7 +115,7 @@ def listMonoid[A] = new Monoid[List[A]] {
 }
 ```
 
-###Folding lists with monoids
+### Folding lists with monoids
 ```
 def foldRight[B](z: B)(f: (A, B) => B): B
 def foldLeft[B](z: B)(f: (B, A) => B): B
@@ -150,7 +150,7 @@ But what if our list has an element type that doesn’t have a Monoid instance? 
 ```
 def foldMap[A,B](as: List[A], m: Monoid[B])(f: A => B): B
 ```
-###Associativity and parallelism
+### Associativity and parallelism
 The fact that a monoid’s operation is associative means we can choose how we fold a data structure like a list. We’ve already seen that operations can be associated to the left or right to reduce a list sequentially with foldLeft or foldRight. But if we have a monoid, we can reduce a list using a balanced fold, which can be more efficient for some operations and also allows for parallelism.
 
 As an example, suppose we have a sequence a, b, c, d that we’d like to reduce using some monoid. Folding to the right, the combination of a, b, c, and d would look like this:
@@ -172,7 +172,7 @@ List("sit").foldLeft("loremipsumdolor")(_ + _)
 List().foldLeft("loremipsumdolorsit")(_ + _)
 "loremipsumdolorsit"
 ```
-###Example: Parallel parsing
+### Example: Parallel parsing
 As a nontrivial use case, let’s say that we wanted to count the number of words in a String. This is a fairly simple parsing problem. We could scan the string character by character, looking for whitespace and counting up the number of runs of consecutive nonwhitespace characters. Parsing sequentially like that, the parser state could be as simple as tracking whether the last character seen was a whitespace.
 
 But imagine doing this not for just a short string, but an enormous text file, possibly too big to fit in memory on a single machine. It would be nice if we could work with chunks of the file in parallel. The strategy would be to split the file into manageable chunks, process several chunks in parallel, and then combine the results. In that case, the parser state needs to be slightly more complicated, and we need to be able to combine intermediate results regardless of whether the section we’re looking at is at the beginning, middle, or end of the file. In other words, we want the combining operation to be associative.
@@ -194,7 +194,7 @@ A Stub is the simplest case, where we haven’t seen any complete words yet. But
 
 For example, counting over the string "lorem ipsum do" would result in Part ("lorem", 1, "do") since there’s one certainly complete word, "ipsum". And since there’s no whitespace to the left of lorem or right of do, we can’t be sure if they’re complete words, so we don’t count them yet. Counting over "lor sit amet, " would result in Part("lor", 2, "").
 
-####MONOID HOMOMORPHISMS
+#### MONOID HOMOMORPHISMS
 If you have your law-discovering cap on while reading this chapter, you may notice that there’s a law that holds for some functions between monoids. Take the String concatenation monoid and the integer addition monoid. If you take the lengths of two strings and add them up, it’s the same as taking the length of the concatenation of those two strings:
 
 ```
@@ -206,7 +206,7 @@ Here, length is a function from String to Int that preserves the monoid structur
 M.op(f(x), f(y)) == f(N.op(x, y))
 ```
 
-###Foldable data structures
+### Foldable data structures
 When we’re writing code that needs to process data contained in one of these structures, we often don’t care about the shape of the structure (whether it’s a tree or a list), or whether it’s lazy or not, or provides efficient random access, and so forth.
 
 For example, if we have a structure full of integers and want to calculate their sum, we can use foldRight:
@@ -228,12 +228,12 @@ trait Foldable[F[_]] {
 
 Here we’re abstracting over a type constructor F, much like we did with the Parser type in the previous chapter. We write it as F[_], where the underscore indicates that F is not a type but a type constructor that takes one type argument. Just like functions that take other functions as arguments are called higher-order functions, something like Foldable is a higher-order type constructor or a higher-kinded type.
 
-###Composing Monoids
+### Composing Monoids
 The Monoid abstraction in itself is not all that compelling, and with the generalized foldMap it’s only slightly more interesting. The real power of monoids comes from the fact that they compose.
 
 This means, for example, that if types A and B are monoids, then the tuple type (A, B) is also a monoid (called their product).
 
-###Assembling more complex monoids
+### Assembling more complex monoids
 Some data structures form interesting monoids as long as the types of the elements they contain also form monoids. For instance, there’s a monoid for merging key-value Maps, as long as the value type is a monoid.
 
 ```
@@ -268,7 +268,7 @@ scala> val m3 = M.op(m1, m2)
 m3: Map[String,Map[String,Int]] = Map(o1 -> Map(i1 -> 1, i2 -> 5))
 ```
 
-###Using composed monoids to fuse traversals
+### Using composed monoids to fuse traversals
 The fact that multiple monoids can be composed into one means that we can perform multiple calculations simultaneously when folding a data structure. For example, we can take the length and sum of a list at the same time in order to calculate the mean:
 ```
 scala> val m = productMonoid(intAddition, intAddition)
@@ -539,7 +539,7 @@ type for which it’s possible to supply an instance of Monad! But we’re just
 getting started. There are many more functions that we can implement once
 and for all in this manner.
 
-###The associative law
+### The associative law
 For example, if we wanted to combine three monadic values into one,
 which two should we combine first? Should it matter? To answer this
 question, let’s for a moment take a step down from the abstract level and
@@ -648,7 +648,7 @@ what a monad is:
 A monad is an implementation of one of the minimal sets of monadic
 combinators, satisfying the laws of associativity and identity.
 
-###The identity monad
+### The identity monad
 To distill monads to their essentials, let’s look at the simplest interesting
 specimen, the identity monad, given by the following type:
 ```case class Id[A](value: A)```
@@ -695,7 +695,7 @@ partial answer to the question of what monads mean. We could say that
 monads provide a context for introducing and binding variables, and
 performing variable substitution.
 
-###The State monad and partial type application
+### The State monad and partial type application
 ```
 Revisiting our State data type
 case class State[S, A](run: S => (A, S)) {
@@ -762,7 +762,7 @@ def stateMonad[S] = new Monad[({type f[x] = State[S,x]})#f] {
 Again, just by giving implementations of unit and flatMap, we get
 implementations of all the other monadic combinators for free.
 
-###Getting and setting state with a for-comprehension
+### Getting and setting state with a for-comprehension
 ```
 val F = stateMonad[Int]
 def zipWithIndex[A](as: List[A]): List[(Int,A)] =
