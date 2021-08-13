@@ -1,10 +1,21 @@
 # Scala Learning
 
 ## [Collections](docs/Collections.md)
+- Collection Operations
+- Mutable Collections
+- Immutable Collections
+- Pattern Matching
+- Iterators
 
 ## [Functional Programming](docs/Functional_Programming.md)
+- Side Effects
+- Pure Functions
+- Monoids
+- Laws of Monoids
+- Monads
+- Laws of Monads
 
-## Concurrency(docs/Concurrency.md)
+## [Concurrency](docs/Concurrency.md)
 
 - [Introduction](docs/Concurrency.md)
 - [Threads](docs/Concurrency.md)
