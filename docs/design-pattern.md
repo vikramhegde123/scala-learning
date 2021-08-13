@@ -1,6 +1,6 @@
-#Design Patterns
+# Design Patterns
 
-###SingleTon Pattern
+### SingleTon Pattern
 Singletons design patterns, which are supported out of the box by the Scala programming language syntax. We achieve this by using the object keyword
 
 The singleton design pattern ensures that a class has only one object instance in the entire application. 
@@ -25,7 +25,7 @@ object SingleTonDatabase {
 }
   ```
 
-###Factory Pattern
+### Factory Pattern
 The factory method design pattern exists in order to encapsulate an actual class instantiation. It simply provides an interface to create an object, and then the subclasses of the factory decide which concrete class to instantiate. 
 
 This design pattern could become useful in cases where we want to create different objects during the runtime of the application
@@ -65,7 +65,7 @@ object FactorySingleTonDatabase {
 }
 ```
 
-###Composite Pattern
+### Composite Pattern
 
 There are so many cases where we can use composite design pattern. Some of them can be:
 
@@ -107,7 +107,7 @@ There are so many cases where we can use composite design pattern. Some of them 
   dir.getSize() // 300 
 ```
 
-###Decorator
+### Decorator
 The decorator design pattern is all about adding responsibilities to objects dynamically.
 
 The decorator design pattern is about creating a decorator class that can wrap the original class and provides additional functionality, keeping the class methods signature intact
@@ -161,7 +161,7 @@ object DecoratorSample {
 }
 ```
 
-###Adapter
+### Adapter
 Adapter pattern works as a bridge between two incompatible interfaces.
 It allows the interface of an existing class to be used as another interface.
 
@@ -209,7 +209,7 @@ This pattern involves a single class which is responsible to join functionalitie
 
 ```
 
-###State machine
+### State machine
 The purpose of the state design pattern is to allow us to choose a different behavior of an object based on the object's internal state
 
 ```
