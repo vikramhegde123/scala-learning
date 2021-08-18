@@ -17,8 +17,7 @@
 
 ## [Concurrency](docs/Concurrency.md)
 
-- [Introduction](docs/Concurrency.md)
-- [Threads](docs/Concurrency.md)
+- [Futures](docs/Concurrency.md)
 - [Reactors and Event Loops](docs/Concurrency.md)
 - [Actors and Messages](docs/Concurrency.md)
 - [Akka](docs/Concurrency.md)

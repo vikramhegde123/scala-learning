@@ -12,16 +12,16 @@ effect if it does something other than simply return a result, for example:
 
 ### 1.1. A program with side effects
 
-Suppose we’re implementing a program to handle purchases at a coffee shop. We’ll begin with a Scala program that uses
-side effects in its implementation (also called an impure program).
+A Side-Effect (often just called Effect) is everything else. I.e. everything that is not reading the arguments and returning a result is a Side-Effect.
 
-```class cafe {
-def buyCoffee(cc: Creditcard): Coffee = {
- val cup = new Coffee()
- // Side effect as the charge can return 
- cc.charge(cup.price) 
- cup
-}
+```
+class cafe {
+  def buyCoffee(cc: Creditcard): Coffee = {
+    val cup = new Coffee()
+    // Side effect as the charge can return 
+    cc.charge(cup.price) 
+    cup
+  }
 } 
 ```
 
