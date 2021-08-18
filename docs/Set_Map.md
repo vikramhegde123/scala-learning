@@ -1,4 +1,4 @@
-#Using sets
+# Using sets
 The key characteristic of sets is that they will ensure that at most one of each object, as determined
 by ==, will be contained in the set at any one time. As an example, we'll use a set to count the number
 of different words in a string.
