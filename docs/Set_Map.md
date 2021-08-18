@@ -34,7 +34,7 @@ Set(see, run, spot)
 ```
 Thus, the text contained exactly three distinct words: spot, run, and see. The most commonly used
 methods on both mutable and immutable sets are shown in Table 17.1.
-Common operations for sets
+## Common operations for sets
 | What it is | Description |
 | ------| ------------- |
 | val nums = Set(1, 2, 3) | Creates an immutable set (nums.toString returnsSet(1, 2, 3))|
@@ -52,4 +52,158 @@ Common operations for sets
 | words ++= List("do", "re", "mi") | Adds multiple elements (words.toString returnsSet(do, re, mi))|
 | words --= List("do", "re") | Removes multiple elements (words.toString returnsSet(mi))|
 | words.clear | Removes all elements (words.toString returns Set())|
+
+
+# Using maps
+Maps let you associate a value with each element of a set. Using a map looks similar to using an array, 
+except instead of indexing with integers counting from 0, you can use any kind of key. If you import 
+the mutable package name, you can create an empty mutable map like this:
+```
+ scala> val map = mutable.Map.empty[String, Int]
+ map: scala.collection.mutable.Map[String,Int] = Map()
+```
+
+Note that when you create a map, you must specify two types. The first type is for the keys of the map, 
+the second for the values. In this case, the keys are strings and the values are integers. Setting entries in 
+a map looks similar to setting entries in an array:
+```
+ scala> map("hello") = 1
+ 
+ scala> map("there") = 2
+ 
+ scala> map
+ res20: scala.collection.mutable.Map[String,Int] =
+ Map(hello -> 1, there -> 2)
+ ```
+Likewise, reading a map is similar to reading an array:
+```
+ scala> map("hello")
+ res21: Int = 1
+ ```
+Putting it all together, here is a method that counts the number of times each word occurs in a string:
+```
+ scala> def countWords(text: String) = {
+ val counts = mutable.Map.empty[String, Int]
+ for (rawWord <- text.split("[ ,!.]+")) {
+ val word = rawWord.toLowerCase
+ val oldCount =
+ if (counts.contains(word)) counts(word)
+ else 0
+ counts += (word -> (oldCount + 1))
+ }
+ counts
+ }
+ countWords: (text:
+ String)scala.collection.mutable.Map[String,Int]
+ 
+ scala> countWords("See Spot run! Run, Spot. Run!")
+ res22: scala.collection.mutable.Map[String,Int] =
+ Map(spot -> 2, see -> 1, run -> 3)
+ ```
+Given these counts, you can see that this text talks a lot about running, but not so much about seeing.
+The way this code works is that a mutable map, named counts, maps each word to the number of times 
+it occurs in the text. For each word in the text, the word's old count is looked up, that count is 
+incremented by one, and the new count is saved back into counts. Note the use ofcontains to check 
+whether a word has been seen yet or not. If counts.contains(word) is not true, then the word has not yet 
+been seen and zero is used for the count.
+Many of the most commonly used methods on both mutable and immutable maps are shown in Table 
+
+## Common operations for maps
+| What it is | What it does |
+| --------- | -------------------|
+| val nums = Map("i" -> 1, "ii" -> 2) | Creates an immutable map (nums.toString returnsMap(i -> 1, ii -> 2)) |
+| nums + ("vi" -> 6) | Adds an entry (returns Map(i -> 1, ii -> 2, vi -> 6)) |
+| nums - "ii" |  Removes an entry (returns Map(i -> 1)) |
+| nums ++ List("iii" -> 3, "v" -> 5) | Adds multiple entries (returns Map(i -> 1, ii -> 2, iii -> 3, v -> 5)) |
+| nums -- List("i", "ii") | Removes multiple entries (returns Map()) |
+| nums.size | Returns the size of the map (returns 2) |
+| nums.contains("ii") | Checks for inclusion (returns true) |
+| nums("ii") | Retrieves the value at a specified key (returns 2) |
+| nums.keys | Returns the keys (returns an Iterable over the strings"i" and "ii") |
+| nums.keySet | Returns the keys as a set (returns Set(i, ii)) |
+| nums.values | Returns the values (returns an Iterable over the integers 1 and 2) |
+| nums.isEmpty | Indicates whether the map is empty (returns false) |
+| import scala.collection.mutable | Makes the mutable collections easy to access |
+| val words = mutable.Map.empty[String, Int] | Creates an empty, mutable map words += ("one" -> 1) Adds a map entry from "one" to 1 (words.toStringreturns Map(one - > 1)) |
+| words -= "one" | Removes a map entry, if it exists words.toStringreturns Map()) |
+| words ++= List("one" -> 1, "two" -> 2, "three" -> 3) | Adds multiple map entries (words.toString returnsMap(one -> 1, two -> 2, three -> 3)) |
+| words --= List("one", "two") | Removes multiple objects (words.toString returnsMap(three -> 3)) |
+
+## Default sets and maps
+For most uses, the implementations of mutable and immutable sets and maps provided
+by the Set(), scala.collection.mutable.Map(), etc., factories will likely be sufficient. The 
+implementations provided by these factories use a fast lookup algorithm, usually involving a hash table,
+so they can quickly decide whether or not an object is in the collection.
+The scala.collection.mutable.Set() factory method, for example, returns 
+a scala.collection.mutable.HashSet, which uses a hash table internally. Similarly, 
+the scala.collection.mutable.Map() factory returns a scala.collection.mutable.HashMap.
+The story for immutable sets and maps is a bit more involved. The class returned by 
+the scala.collection.immutable.Set() factory method, for example, depends on how many elements you 
+pass to it, as shown in Table 17.3. For sets with fewer than five elements, a special class devoted 
+exclusively to sets of each particular size is used to maximize performance. Once you request a set that 
+has five or more elements in it, however, the factory method will return an implementation that uses 
+hash tries.
+Similarly, the scala.collection.immutable.Map() factory method will return a different class depending 
+on how many key-value pairs you pass to it, as shown in Table 17.4. As with sets, for immutable maps 
+with fewer than five elements, a special class devoted exclusively to maps of each particular size is 
+used to maximize performance. Once a map has five or more key-value pairs in it, however, an 
+immutable HashMap is used.
+The default immutable implementation classes shown in Tables 17.3 and 17.4 work together to give 
+you maximum performance. For example, if you add an element to an EmptySet, it will return a Set1. 
+If you add an element to that Set1, it will return a Set2. If you then remove an element from the Set2, 
+you'll get another Set1.
+
+### Default immutable set implementations
+
+```
+Number of elements Implementation
+0 scala.collection.immutable.EmptySet
+1 scala.collection.immutable.Set1
+2 scala.collection.immutable.Set2
+3 scala.collection.immutable.Set3
+4 scala.collection.immutable.Set4
+5 or more scala.collection.immutable.HashSet
+Table 17.4 - Default immutable map implementations
+Number of elements Implementation
+0 scala.collection.immutable.EmptyMap
+1 scala.collection.immutable.Map1
+2 scala.collection.immutable.Map2
+3 scala.collection.immutable.Map3
+4 scala.collection.immutable.Map4
+5 or more scala.collection.immutable.HashMap
+```
+
+## Sorted sets and maps
+On occasion you may need a set or map whose iterator returns elements in a particular order. For this 
+purpose, the Scala collections library provides traits SortedSet and SortedMap. These traits are 
+implemented by classes TreeSet and TreeMap, which use a red-black tree to keep elements (in the case 
+of TreeSet) or keys (in the case of TreeMap) in order. The order is determined by the Ordered trait, 
+which the element type of the set, or key type of the map, must either mix in or be implicitly 
+convertible to. These classes only come in immutable variants. Here are some TreeSet examples:
+```
+ scala> import scala.collection.immutable.TreeSet
+ import scala.collection.immutable.TreeSet
+ 
+ scala> val ts = TreeSet(9, 3, 1, 8, 0, 2, 7, 4, 6, 5)
+ ts: scala.collection.immutable.TreeSet[Int] =
+ TreeSet(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+ 
+ scala> val cs = TreeSet('f', 'u', 'n')
+ cs: scala.collection.immutable.TreeSet[Char] =
+ TreeSet(f, n, u)
+ ```
+And here are a few TreeMap examples:
+```
+ scala> import scala.collection.immutable.TreeMap
+ import scala.collection.immutable.TreeMap
+ 
+ scala> var tm = TreeMap(3 -> 'x', 1 -> 'x', 4 -> 'x')
+ tm: scala.collection.immutable.TreeMap[Int,Char] =
+ Map(1 -> x, 3 -> x, 4 -> x)
+ 
+ scala> tm += (2 -> 'x')
+ 
+ scala> tm
+ res30: scala.collection.immutable.TreeMap[Int,Char] =
+ Map(1 -> x, 2 -> x, 3 -> x, 4 -> x)
 ```
