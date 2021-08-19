@@ -782,3 +782,31 @@ keeps a state that’s an Int, which is incremented at each step. We run the
 whole composite state action starting from 0. We then reverse the result
 since we constructed it in reverse order.
 
+# Exercises
+1) Give Monoid instances for integer addition and multiplication as well as the
+   Boolean operators.
+2) A function having the same argument and return type is sometimes called
+   an endofunction. Write a monoid for endofunctions.
+3) Implement a foldMap for IndexedSeq.
+   Your implementation should use
+   the strategy of splitting the sequence in two, recursively processing each
+   half, and then adding the answers together with the monoid.
+   ```
+   IndexedSeq is the interface for immutable data structures supporting efficient random access. It also has efficient splitAt and length methods.
+   def foldMapV[A,B](v: IndexedSeq[A], m: Monoid[B])(f: A => B): B
+   ```
+4) Write a monoid instance for WC and make sure that it meets the monoid
+laws.
+
+``` 
+
+sealed trait WC
+   case class Stub(chars: String) extends WC
+   case class Part(lStub: String, words: Int, rStub: String) extends WC
+   
+val wcMonoid: Monoid[WC]
+```
+5) Use the WC monoid above to implement a function that counts words in a String
+   by recursively splitting it into substrings and counting the words in those
+   substrings.
+
