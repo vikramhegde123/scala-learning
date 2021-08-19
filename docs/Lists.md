@@ -1,4 +1,4 @@
-# List
+#List
 The List class is a linear, immutable sequence. All this means is that it’s a linked-list
 that you can’t modify. Any time you want to add or remove List elements, you create
 a new List from an existing List.

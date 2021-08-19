@@ -1,10 +1,9 @@
 # Collections Hierachy
 ![](images/collections-hierachy.png)
 
-# [Lists](Lists.md)
-# [Sets and Map](Set_Map.md)
-
-
+#[Lists](Lists.md)
+#[Sets,Map,Tuples](Set_Map_Tuples.md)
+#[Iterations][Iterations.md]
 
 
 # Exercises
