@@ -3,7 +3,7 @@
 
 # [Lists](Lists.md)
 # [Sets,Map,Tuples](Set_Map_Tuples.md)
-# [Iterations][Iterators.md]
+# [Iterations](Iterators.md)
 
 
 # Exercises
