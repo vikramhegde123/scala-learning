@@ -265,8 +265,8 @@ idx: (String, Int) = (quick,1)
 ```
 This syntax gives multiple definitions of the same expression. Each variable is initialized with its own
 evaluation of the expression on the right-hand side. That the expression evaluates to a tuple in this case
-does not matter. Both variables are initialized to the tuple in its entirety. SeeChapter 18 for some
-examples where multiple definitions are convenient.
+does not matter. Both variables are initialized to the tuple in its entirety. 
+
 As a note of warning, tuples are almost too easy to use. Tuples are great when you combine data that
 has no meaning beyond "an A and a B." However, whenever the combination has some meaning, or
 you want to add some methods to the combination, it is better to go ahead and create a class. For
